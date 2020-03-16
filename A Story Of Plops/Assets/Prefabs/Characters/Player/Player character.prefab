@@ -153,17 +153,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b67dc706ead2d3c4282c3083115ba0c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxMoveSpeed: 8
-  moveSpeedAcceleration: 0.5
-  moveSpeedDeacceleration: 1
-  jumpForce: 35
   characterController: {fileID: 8251987437844651186}
   cameraTarget: {fileID: 3414874667113602964}
   playerCamera: {fileID: 0}
   characterGraphics: {fileID: 6355041242595435713}
   animator: {fileID: 0}
+  maxMoveSpeed: 8
+  moveSpeedAcceleration: 0.5
+  moveSpeedDeacceleration: 1
+  jumpForce: 35
   gravityScale: 0.2
   rotationSpeed: 10
+  maxJumps: 2
 --- !u!143 &8251987437844651186
 CharacterController:
   m_ObjectHideFlags: 0
