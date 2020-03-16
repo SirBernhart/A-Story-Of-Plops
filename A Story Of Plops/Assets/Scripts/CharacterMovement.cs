@@ -18,6 +18,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float jumpForce;
     [SerializeField] private float gravityScale;
     [SerializeField] private float rotationSpeed;
+    [SerializeField] private int maxJumps;
 
     // Internal variables
     private float currentMoveSpeed;
@@ -25,13 +26,14 @@ public class CharacterMovement : MonoBehaviour
     Vector3 lookDirection;
     Vector3 inputDirection;
     private bool isJumping;
+    private int jumpCount;
 
 
-    public void MoveInDirection(float horizontal, float vertical)
+    public void MoveInDirection(float xMovement, float yMovement, bool zMovement)
     {
-        if (vertical != 0f || horizontal != 0f)
+        if (yMovement != 0f || xMovement != 0f)
         {
-            RotateCharacterGraphics(horizontal, vertical);
+            RotateCharacterGraphics(xMovement, yMovement);
 
             if (currentMoveSpeed < maxMoveSpeed)
             {
@@ -58,39 +60,40 @@ public class CharacterMovement : MonoBehaviour
             {
                 //animator.SetTrigger("Land");
                 isJumping = false;
+                jumpCount = 0;
             }
             moveDirection.y = 0f;
-
-            if (Input.GetAxis("Jump") > 0)
-            {
-                //animator.SetTrigger("Jump");
-                moveDirection.y = jumpForce;
-                isJumping = true;
-            }
         }
-
+        
+        if (zMovement == true && jumpCount < maxJumps)
+        {
+            //animator.SetTrigger("Jump");
+            moveDirection.y = jumpForce;
+            isJumping = true;
+            jumpCount++;
+        }
         float yStore = moveDirection.y;
-        moveDirection = GetLookDirection(vertical, horizontal) * currentMoveSpeed;
+        moveDirection = GetLookDirection(yMovement, xMovement) * currentMoveSpeed;
         moveDirection.y = yStore;
 
         moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale);
         characterController.Move(moveDirection * Time.deltaTime);
     }
 
-    private void RotateCharacterGraphics(float horizontal, float vertical)
+    private void RotateCharacterGraphics(float xMovement, float yMovement)
     {
-        Vector3 lookDirection = GetLookDirection(vertical, horizontal);
+        Vector3 lookDirection = GetLookDirection(yMovement, xMovement);
         lookDirection.y = 0f;
 
         Quaternion newRotation = Quaternion.LookRotation(new Vector3(lookDirection.x, 0f, lookDirection.z));
         characterGraphics.rotation = Quaternion.Slerp(characterGraphics.rotation, newRotation, rotationSpeed * Time.deltaTime);
     }
 
-    public Vector3 GetLookDirection(float vertical, float horizontal)
+    public Vector3 GetLookDirection(float yMovement, float xMovement)
     {
         Vector3 auxiliaryPoint = new Vector3(cameraTarget.position.x, playerCamera.position.y, cameraTarget.position.z);
         Vector3 relativeForward = (auxiliaryPoint - playerCamera.position).normalized;
 
-        return ((relativeForward * vertical) + (playerCamera.right * horizontal)).normalized;
+        return ((relativeForward * yMovement) + (playerCamera.right * xMovement)).normalized;
     }
 }
