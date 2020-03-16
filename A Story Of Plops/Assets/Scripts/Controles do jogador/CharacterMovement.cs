@@ -10,6 +10,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private Transform playerCamera;
     [SerializeField] private Transform characterGraphics;
     [SerializeField] private Animator animator;
+    private JumpCountController jumpCountController;
 
     // Object editable properties
     [SerializeField] private float maxMoveSpeed;
@@ -18,16 +19,17 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float jumpForce;
     [SerializeField] private float gravityScale;
     [SerializeField] private float rotationSpeed;
-    [SerializeField] private int maxJumps;
 
     // Internal variables
     private float currentMoveSpeed;
     private Vector3 moveDirection;
     Vector3 lookDirection;
     Vector3 inputDirection;
-    private bool isJumping;
-    private int jumpCount;
 
+    private void Start()
+    {
+        jumpCountController = new JumpCountController();
+    }
 
     public void MoveInDirection(float xMovement, float yMovement, bool zMovement)
     {
@@ -56,21 +58,19 @@ public class CharacterMovement : MonoBehaviour
 
         if (characterController.isGrounded)
         {
-            if (isJumping)
+            if (jumpCountController.GetJumpCount() > 0)
             {
                 //animator.SetTrigger("Land");
-                isJumping = false;
-                jumpCount = 0;
+                jumpCountController.ResetJumpCount();
             }
             moveDirection.y = 0f;
         }
         
-        if (zMovement == true && jumpCount < maxJumps)
+        if (zMovement == true && jumpCountController.CheckCanJump())
         {
             //animator.SetTrigger("Jump");
             moveDirection.y = jumpForce;
-            isJumping = true;
-            jumpCount++;
+            jumpCountController.AddJumpCount();
         }
         float yStore = moveDirection.y;
         moveDirection = GetLookDirection(yMovement, xMovement) * currentMoveSpeed;
