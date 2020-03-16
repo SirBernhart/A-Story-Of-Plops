@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    private float vertical, horizontal;
+    private float yMovement, xMovement;
+    private bool zMovement;
     [SerializeField] private CharacterMovement characterMovement;
 
     // Update is called once per frame
     void Update()
     {
-        vertical = Input.GetAxisRaw("Vertical");
-        horizontal = Input.GetAxisRaw("Horizontal");
+        yMovement = Input.GetAxisRaw("Vertical");
+        xMovement = Input.GetAxisRaw("Horizontal");
+        zMovement = Input.GetButtonDown("Jump");
 
-        characterMovement.MoveInDirection(horizontal, vertical);
+        characterMovement.MoveInDirection(xMovement, yMovement, zMovement);
     }
 }
