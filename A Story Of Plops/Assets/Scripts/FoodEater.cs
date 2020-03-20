@@ -31,26 +31,31 @@ public class FoodEater : MonoBehaviour
 
     public void EatFood()
     {
-        jumpCount.IncreaseMaxJumpCount(GetClosestFood().GetComponent<Food>().Eat());
-        
+        Transform closestFood = GetClosestFood();
+        if (closestFood != null)
+            jumpCount.IncreaseMaxJumpCount(closestFood.GetComponent<Food>().Eat());
     }
 
     public Transform GetClosestFood()
     {
-        Transform closestFood = foods[0];
-        float closestFoodDistance = Vector3.Distance(transform.position, closestFood.position);
-
-        for(int i = 1 ; i < foods.Count ; ++i)
+        if(foods.Count != 0)
         {
-            float closestFoodCandidateDistance = Vector3.Distance(transform.position, foods[i].position);
-            if (closestFoodCandidateDistance < closestFoodDistance)
-            {
-                closestFood = foods[i];
-                closestFoodDistance = closestFoodCandidateDistance;
-            }
-        }
+            Transform closestFood = foods[0];
+            float closestFoodDistance = Vector3.Distance(transform.position, closestFood.position);
 
-        return closestFood;
+            for(int i = 1 ; i < foods.Count ; ++i)
+            {
+                float closestFoodCandidateDistance = Vector3.Distance(transform.position, foods[i].position);
+                if (closestFoodCandidateDistance < closestFoodDistance)
+                {
+                    closestFood = foods[i];
+                    closestFoodDistance = closestFoodCandidateDistance;
+                }
+            }
+
+            return closestFood;
+        }
+        return null;
     }
 
 
