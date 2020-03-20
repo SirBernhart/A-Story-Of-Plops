@@ -1,4 +1,6 @@
-﻿public class JumpCountController
+﻿using UnityEngine;
+
+public class JumpCountController : MonoBehaviour
 {
     private int maxJumpCount = 3;
     private int jumpCount;
@@ -21,9 +23,9 @@
         return jumpCount < maxJumpCount;
     }
 
-    public void IncreaseMaxJumpCount()
+    public void IncreaseMaxJumpCount(int jumpsToIncrease)
     {
-        ++maxJumpCount;
+        maxJumpCount += jumpsToIncrease;
     }
 
     public int GetMaxJumpCount()
