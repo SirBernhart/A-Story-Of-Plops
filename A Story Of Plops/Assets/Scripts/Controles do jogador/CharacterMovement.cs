@@ -11,6 +11,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private Transform characterGraphics;
     [SerializeField] private Animator animator;
     [SerializeField] private JumpCountController jumpCountController;
+    [SerializeField] private Respawner respawner;
 
     // Object editable properties
     [SerializeField] private float maxMoveSpeed;
@@ -112,5 +113,13 @@ public class CharacterMovement : MonoBehaviour
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
         hitNormal = hit.normal;
+    }
+
+    private void Update()
+    {
+        if (transform.position.y < -80)
+        {
+            respawner.Respawn();
+        }
     }
 }
