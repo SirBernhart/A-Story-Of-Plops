@@ -7,6 +7,7 @@ public class FoodEater : MonoBehaviour
     private List<Transform> foods;
     [SerializeField] private JumpCountController jumpCount;
     [SerializeField] private FoodCounter foodCount;
+    [SerializeField] private TooltipController tooltipController;
 
     private void Start()
     {
@@ -19,6 +20,7 @@ public class FoodEater : MonoBehaviour
         if(other.tag == "Food")
         {
             foods.Add(other.transform);
+            tooltipController.ShowEatTooltip(true);
         }
     }
 
@@ -27,6 +29,7 @@ public class FoodEater : MonoBehaviour
         if (other.tag == "Food")
         {
             foods.Remove(other.transform);
+            tooltipController.ShowEatTooltip(false);
         }
     }
 
@@ -37,6 +40,7 @@ public class FoodEater : MonoBehaviour
         {
             jumpCount.IncreaseMaxJumpCount(closestFood.GetComponent<Food>().Eat());
             foodCount.IncreaseFoodEaten();
+            tooltipController.ShowEatTooltip(false);
         }
     }
 
