@@ -10,7 +10,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private Transform playerCamera;
     [SerializeField] private Transform characterGraphics;
     [SerializeField] private Animator animator;
-    private JumpCountController jumpCountController;
+    [SerializeField] private JumpCountController jumpCountController;
 
     // Object editable properties
     [SerializeField] private float maxMoveSpeed;
@@ -25,11 +25,6 @@ public class CharacterMovement : MonoBehaviour
     private Vector3 moveDirection;
     Vector3 lookDirection;
     Vector3 inputDirection;
-
-    private void Start()
-    {
-        jumpCountController = new JumpCountController();
-    }
 
     public void MoveInDirection(float xMovement, float yMovement, bool zMovement)
     {
