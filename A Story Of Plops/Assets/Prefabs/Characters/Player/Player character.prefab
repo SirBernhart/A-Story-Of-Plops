@@ -29,7 +29,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 69906187021439291}
   m_Father: {fileID: 208827255982661095}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -103,6 +104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 208827255982661095}
   - component: {fileID: 7616471520552814464}
+  - component: {fileID: 7817961689820067084}
   - component: {fileID: 208827255982661094}
   - component: {fileID: 8251987437844651186}
   m_Layer: 0
@@ -119,7 +121,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 208827255982661092}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -141,6 +143,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterMovement: {fileID: 208827255982661094}
+  foodEater: {fileID: 0}
+--- !u!114 &7817961689820067084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208827255982661092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9861bad08fe38cf47bddfa617053727c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &208827255982661094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,13 +173,13 @@ MonoBehaviour:
   playerCamera: {fileID: 0}
   characterGraphics: {fileID: 6355041242595435713}
   animator: {fileID: 0}
+  jumpCountController: {fileID: 7817961689820067084}
   maxMoveSpeed: 8
   moveSpeedAcceleration: 0.5
   moveSpeedDeacceleration: 1
   jumpForce: 35
   gravityScale: 0.2
   rotationSpeed: 10
-  maxJumps: 2
 --- !u!143 &8251987437844651186
 CharacterController:
   m_ObjectHideFlags: 0
@@ -183,6 +198,64 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!1 &1459021455290185838
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 69906187021439291}
+  - component: {fileID: 7651933453112514575}
+  - component: {fileID: 6292394941259876868}
+  m_Layer: 0
+  m_Name: Food eater
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &69906187021439291
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459021455290185838}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.030000001, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6355041242595435713}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7651933453112514575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459021455290185838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 525fedfb19c75c54db6e4332eaae7e44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpCount: {fileID: 7817961689820067084}
+--- !u!135 &6292394941259876868
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459021455290185838}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!1 &6280472925505846148
 GameObject:
   m_ObjectHideFlags: 0
