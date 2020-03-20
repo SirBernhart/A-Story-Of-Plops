@@ -514,6 +514,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.313
       objectReference: {fileID: 0}
+    - target: {fileID: 6355041242595435713, guid: f92025eb8747f7c43b9b6fffba8dc208,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7524296
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355041242595435713, guid: f92025eb8747f7c43b9b6fffba8dc208,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.6586727
+      objectReference: {fileID: 0}
     - target: {fileID: 7616471520552814464, guid: f92025eb8747f7c43b9b6fffba8dc208,
         type: 3}
       propertyPath: foodEater
