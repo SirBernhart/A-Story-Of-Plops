@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Food : MonoBehaviour
 {
-    private int jumpsToIncrease;
+    [SerializeField] private int jumpsToIncrease = 1;
 
-    // "Eat"
     public int Eat()
     {
         Destroy(gameObject, 0.2f);

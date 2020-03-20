@@ -5,31 +5,34 @@ using UnityEngine;
 public class FoodEater : MonoBehaviour
 {
     private List<Transform> foods;
+    [SerializeField] private JumpCountController jumpCount;
 
     private void Start()
     {
         foods = new List<Transform>();
+        
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "food")
+        if(other.tag == "Food")
         {
-            foods.Add(other.gameObject.transform);
+            foods.Add(other.transform);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "food")
+        if (other.tag == "Food")
         {
-            foods.Remove(other.gameObject.transform);
+            foods.Remove(other.transform);
         }
     }
 
-    public int EatFood()
+    public void EatFood()
     {
-        return GetClosestFood().GetComponent<Food>().Eat();
+        jumpCount.IncreaseMaxJumpCount(GetClosestFood().GetComponent<Food>().Eat());
+        
     }
 
     public Transform GetClosestFood()
