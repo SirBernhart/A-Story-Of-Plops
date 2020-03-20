@@ -7,6 +7,7 @@ public class PlayerInput : MonoBehaviour
     private float yMovement, xMovement;
     private bool zMovement;
     [SerializeField] private CharacterMovement characterMovement;
+    [SerializeField] private FoodEater foodEater;
 
     // Update is called once per frame
     void Update()
@@ -16,5 +17,10 @@ public class PlayerInput : MonoBehaviour
         zMovement = Input.GetButtonDown("Jump");
 
         characterMovement.MoveInDirection(xMovement, yMovement, zMovement);
+
+        if (Input.GetButtonDown("Interact"))
+        {
+            foodEater.EatFood();
+        }
     }
 }
