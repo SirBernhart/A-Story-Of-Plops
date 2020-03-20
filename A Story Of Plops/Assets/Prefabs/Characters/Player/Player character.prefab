@@ -83,12 +83,11 @@ MonoBehaviour:
   animator: {fileID: 4138834776493966920}
   jumpCountController: {fileID: 7817961689820067084}
   respawner: {fileID: 1258701194284118317}
-  groundChecker: {fileID: 0}
   maxMoveSpeed: 8
   moveSpeedAcceleration: 0.5
   moveSpeedDeacceleration: 1
   jumpForce: 35
-  gravityScale: 0.2
+  gravityScale: 0.006
   rotationSpeed: 10
   slideFriction: 0.3
 --- !u!143 &8251987437844651186
@@ -135,7 +134,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1459021455290185838}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.68700004, z: 0.207}
+  m_LocalPosition: {x: 0, y: 0.86, z: 1.91}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8938146086920219988}
@@ -155,6 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpCount: {fileID: 7817961689820067084}
   foodCount: {fileID: 0}
+  tooltipController: {fileID: 0}
 --- !u!135 &6292394941259876868
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -166,7 +166,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.26
+  m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!1 &2428229307934694024
 GameObject:

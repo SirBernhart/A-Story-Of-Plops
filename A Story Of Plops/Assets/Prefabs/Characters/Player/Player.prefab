@@ -288,6 +288,11 @@ PrefabInstance:
       propertyPath: m_Orbits.Array.data[1].m_Height
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6735721712420169894, guid: 4904aa13bc8fc814cb60bf385f4f00e8,
+        type: 3}
+      propertyPath: m_XAxis.Value
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 6735721712970575353, guid: 4904aa13bc8fc814cb60bf385f4f00e8,
         type: 3}
       propertyPath: m_FollowOffset.y
@@ -478,11 +483,6 @@ PrefabInstance:
         type: 3}
       propertyPath: jumpForce
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 208827255982661094, guid: f92025eb8747f7c43b9b6fffba8dc208,
-        type: 3}
-      propertyPath: gravityScale
-      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 208827255982661094, guid: f92025eb8747f7c43b9b6fffba8dc208,
         type: 3}
