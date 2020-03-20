@@ -6,6 +6,7 @@ public class FoodEater : MonoBehaviour
 {
     private List<Transform> foods;
     [SerializeField] private JumpCountController jumpCount;
+    [SerializeField] private FoodCounter foodCount;
 
     private void Start()
     {
@@ -33,7 +34,10 @@ public class FoodEater : MonoBehaviour
     {
         Transform closestFood = GetClosestFood();
         if (closestFood != null)
+        {
             jumpCount.IncreaseMaxJumpCount(closestFood.GetComponent<Food>().Eat());
+            foodCount.IncreaseFoodEaten();
+        }
     }
 
     public Transform GetClosestFood()
