@@ -19,12 +19,21 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float jumpForce;
     [SerializeField] private float gravityScale;
     [SerializeField] private float rotationSpeed;
+    public float slideFriction = 0.3f;
 
     // Internal variables
     private float currentMoveSpeed;
     private Vector3 moveDirection;
     Vector3 lookDirection;
     Vector3 inputDirection;
+    Vector3 hitNormal;
+    bool isGrounded;
+    float slopeLimit;
+
+    private void Start()
+    {
+        slopeLimit = characterController.slopeLimit;
+    }
 
     public void MoveInDirection(float xMovement, float yMovement, bool zMovement)
     {
@@ -51,7 +60,7 @@ public class CharacterMovement : MonoBehaviour
             }
         }
 
-        if (characterController.isGrounded)
+        if (isGrounded)
         {
             if (jumpCountController.GetJumpCount() > 0)
             {
@@ -72,7 +81,15 @@ public class CharacterMovement : MonoBehaviour
         moveDirection.y = yStore;
 
         moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale);
+
+        if (!isGrounded)
+        {
+            moveDirection.x += (1f - hitNormal.y) * hitNormal.x * (currentMoveSpeed - slideFriction);
+            moveDirection.z += (1f - hitNormal.y) * hitNormal.z * (currentMoveSpeed  - slideFriction);
+        }
         characterController.Move(moveDirection * Time.deltaTime);
+
+        isGrounded = characterController.isGrounded && (Vector3.Angle(Vector3.up, hitNormal) <= slopeLimit);
     }
 
     private void RotateCharacterGraphics(float xMovement, float yMovement)
@@ -90,5 +107,10 @@ public class CharacterMovement : MonoBehaviour
         Vector3 relativeForward = (auxiliaryPoint - playerCamera.position).normalized;
 
         return ((relativeForward * yMovement) + (playerCamera.right * xMovement)).normalized;
+    }
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        hitNormal = hit.normal;
     }
 }
