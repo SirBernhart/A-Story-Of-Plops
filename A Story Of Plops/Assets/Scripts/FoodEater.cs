@@ -38,6 +38,7 @@ public class FoodEater : MonoBehaviour
         Transform closestFood = GetClosestFood();
         if (closestFood != null)
         {
+            foods.Remove(closestFood);
             jumpCount.IncreaseMaxJumpCount(closestFood.GetComponent<Food>().Eat());
             foodCount.IncreaseFoodEaten();
             tooltipController.ShowEatTooltip(false);
