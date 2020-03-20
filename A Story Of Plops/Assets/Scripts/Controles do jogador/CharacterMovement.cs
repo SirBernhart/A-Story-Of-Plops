@@ -46,7 +46,6 @@ public class CharacterMovement : MonoBehaviour
             {
                 currentMoveSpeed += moveSpeedAcceleration;
             }
-            //animator.SetFloat("InputMove", currentMoveSpeed/maxMoveSpeed);
         }
         else
         {
@@ -57,23 +56,32 @@ public class CharacterMovement : MonoBehaviour
                 {
                     currentMoveSpeed = 0;
                 }
-                //animator.SetFloat("InputMove", currentMoveSpeed / maxMoveSpeed);
             }
         }
 
         if (isGrounded)
         {
+            animator.SetBool("isGrounded", true);
+            Debug.Log("isGrounded");
+            moveDirection.y = -50;
+
             if (jumpCountController.GetJumpCount() > 0)
             {
-                //animator.SetTrigger("Land");
                 jumpCountController.ResetJumpCount();
             }
-            moveDirection.y = 0f;
+        }
+        else
+        {
+            animator.SetBool("isGrounded", false);
+            Debug.Log("notGrounded");
+            moveDirection.x += (1f - hitNormal.y) * hitNormal.x * (currentMoveSpeed - slideFriction);
+            moveDirection.z += (1f - hitNormal.y) * hitNormal.z * (currentMoveSpeed  - slideFriction);
+            moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale);
         }
         
         if (zMovement == true && jumpCountController.CheckCanJump())
         {
-            //animator.SetTrigger("Jump");
+            animator.SetTrigger("jump");
             moveDirection.y = jumpForce;
             jumpCountController.AddJumpCount();
         }
@@ -81,13 +89,7 @@ public class CharacterMovement : MonoBehaviour
         moveDirection = GetLookDirection(yMovement, xMovement) * currentMoveSpeed;
         moveDirection.y = yStore;
 
-        moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale);
-
-        if (!isGrounded)
-        {
-            moveDirection.x += (1f - hitNormal.y) * hitNormal.x * (currentMoveSpeed - slideFriction);
-            moveDirection.z += (1f - hitNormal.y) * hitNormal.z * (currentMoveSpeed  - slideFriction);
-        }
+        animator.SetFloat("moving", currentMoveSpeed);
         characterController.Move(moveDirection * Time.deltaTime);
 
         isGrounded = characterController.isGrounded && (Vector3.Angle(Vector3.up, hitNormal) <= slopeLimit);
