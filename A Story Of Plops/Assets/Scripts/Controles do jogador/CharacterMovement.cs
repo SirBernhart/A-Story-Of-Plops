@@ -74,7 +74,7 @@ public class CharacterMovement : MonoBehaviour
             animator.SetBool("isGrounded", false);
             moveDirection.x += (1f - hitNormal.y) * hitNormal.x * (currentMoveSpeed - slideFriction);
             moveDirection.z += (1f - hitNormal.y) * hitNormal.z * (currentMoveSpeed  - slideFriction);
-            moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale);
+            moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale) * Time.deltaTime;
         }
         
         if (zMovement == true && jumpCountController.CheckCanJump())
