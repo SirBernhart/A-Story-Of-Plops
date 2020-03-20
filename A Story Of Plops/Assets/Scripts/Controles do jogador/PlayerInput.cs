@@ -8,6 +8,7 @@ public class PlayerInput : MonoBehaviour
     private bool zMovement;
     [SerializeField] private CharacterMovement characterMovement;
     [SerializeField] private FoodEater foodEater;
+    [SerializeField] private Respawner respawner;
 
     // Update is called once per frame
     void Update()
@@ -21,6 +22,11 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetButtonDown("Interact"))
         {
             foodEater.EatFood();
+        }
+
+        if (Input.GetButtonDown("Cancel"))
+        {
+            respawner.Respawn();
         }
     }
 }
