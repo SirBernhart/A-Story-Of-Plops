@@ -62,7 +62,6 @@ public class CharacterMovement : MonoBehaviour
         if (isGrounded)
         {
             animator.SetBool("isGrounded", true);
-            Debug.Log("isGrounded");
             moveDirection.y = -50;
 
             if (jumpCountController.GetJumpCount() > 0)
@@ -73,7 +72,6 @@ public class CharacterMovement : MonoBehaviour
         else
         {
             animator.SetBool("isGrounded", false);
-            Debug.Log("notGrounded");
             moveDirection.x += (1f - hitNormal.y) * hitNormal.x * (currentMoveSpeed - slideFriction);
             moveDirection.z += (1f - hitNormal.y) * hitNormal.z * (currentMoveSpeed  - slideFriction);
             moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale);
